@@ -1,0 +1,27 @@
+<h2>{{name}}</h2>
+<hr>
+<ul class="list-group">
+    <li style="border-radius: 13px;" *ngFor="let list of lists" class="list-group-item">
+      <input (click)="dataModal(list.idItem,list.name)" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+      {{list.name}}
+      <button (click)="deleteItem(list.idItem)" class="buttondelete" type="button">x</button>
+    </li>
+</ul>
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Actualizar registro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label  >name:</label>
+        <input type="text" [(ngModel)]="itemName" id="itemName" name="itemName" >
+      </div>
+      <div class="modal-footer">
+        <button (click)="updateItem()" class="btn btn-primary"  data-bs-dismiss="modal" aria-label="Close" >Update item</button>
+      </div>
+    </div>
+  </div>
+</div>
