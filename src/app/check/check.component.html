@@ -1,10 +1,10 @@
-<h2>{{name}}</h2>
+<h2>Lista empleados</h2>
 <hr>
 <ul class="list-group">
-    <li style="border-radius: 13px;" *ngFor="let list of lists" class="list-group-item">
-      <input (click)="dataModal(list.idItem,list.name)" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+    <li style="border-radius: 13px;" *ngFor="let list of listsEmployee" class="list-group-item">
+      <input (click)="dataModal(list)" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" class="form-check-input me-1" type="checkbox" value="" aria-label="...">
       {{list.name}}
-      <button (click)="deleteItem(list.idItem)" class="buttondelete" type="button">x</button>
+      <button (click)="deleteItem(list.id)" class="buttondelete" type="button">x</button>
     </li>
 </ul>
 
@@ -16,8 +16,23 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label  >name:</label>
+        <label>Identificacion:</label>
+        <input type="text" [(ngModel)]="identification" id="identification" name="identification" >
+      </div>
+      <div class="modal-body">
+        <label >nombre:</label>
         <input type="text" [(ngModel)]="itemName" id="itemName" name="itemName" >
+      </div>
+      <div class="modal-body">
+        <label >fecha:</label>
+        <input type="date" [(ngModel)]="date" id="date" name="date" >
+      </div>
+      <div class="modal-body">
+        <label >cargo:</label>
+        <select [(ngModel)]="position" id="position" name="position" (change)="getListPosition()" class="d-inline-block form-control m-auto">
+            <option value="All">Cargo</option>
+            <option *ngFor="let list of lists" >{{list.name}}</option>
+        </select>
       </div>
       <div class="modal-footer">
         <button (click)="updateItem()" class="btn btn-primary"  data-bs-dismiss="modal" aria-label="Close" >Update item</button>
