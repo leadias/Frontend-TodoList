@@ -8,65 +8,49 @@ import { ListService } from '../services/list.service';
 })
 export class ListComponent implements OnInit {
   
-  name: string = "";
+  name: string = "All";
   lists:any;
-  listsEmployee:any;
   getLists:any;
   id:number = 1; 
   item = ""
-  date= ""
-  identification = ""
-  position = ""
   constructor(
     private listService : ListService
   ) { }
   
   ngOnInit(): void {
-    this.getList();
-    this.getListEmployee();
+
   }
 
   setSort(event: Event): void {
     this.name = (<HTMLInputElement>event.target).value;
+    this.getList();
   }
 
   getList(){
-     this.getLists = this.listService.get().subscribe(data =>
-      this.lists = data.response );
-
-  }
-
-  getListEmployee(){
-    this.getLists = this.listService.getEmployes().subscribe(data =>
-     this.listsEmployee = data.response );
-
- }
-
-  getListPosition(){
-    switch (this.position) {
-      case 'Scrum master':
-        this.id = 0;
-        break;
-      case 'Desarrollador':
+    switch (this.name) {
+      case 'All':
         this.id = 1;
         break;
-
-      case 'QA':
+      case 'Sucess':
         this.id = 2;
+        break;
+
+      case 'Faild':
+        this.id = 3;
         break;
     
       default:
-        this.id = 3;
+        this.id = 1;
         break;
     }
+     this.getLists = this.listService.get(this.id).subscribe(data =>
+      this.lists = data.response );
   }
 
   createItem(){
     var item ={
-       identification:this.identification,
-       name: this.name,
-       date: this.date,
-       position: this.id
+       idList:this.id,
+       name: this.item
     }
     this.listService.createItem(item).subscribe(data =>
       this.getList());

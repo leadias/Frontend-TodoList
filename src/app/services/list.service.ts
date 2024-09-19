@@ -17,14 +17,8 @@ export class ListService {
   ) { }
 
 
-  get() {
-    return this.http.get<ListResponse>(environment.api  + "getList/" ).pipe(
-            map((data: any) => data)
-    )
-  }
-
-  getEmployes() {
-    return this.http.get<ListResponse>(environment.api  + "getListEmployee" ).pipe(
+  get(idList:number) {
+    return this.http.get<ListResponse>(environment.api  + "getList/"+  idList ).pipe(
             map((data: any) => data)
     )
   }

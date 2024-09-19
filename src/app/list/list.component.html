@@ -1,42 +1,27 @@
 <div class="container">
     <div class="side side-left">
-        <h2>NN S.A.</h2>
+        <h2>To do List</h2>
         <br>
-        <h4>Información empleados</h4>
+        <div class="row flex-between">
+            <div class="d-inline-flex">
+            </div>
+            <div class="form-group">
+                <select (change)="setSort($event)" class="d-inline-block form-control m-auto">
+                    <option value="All">All</option>
+                    <option value="Sucess">SUCESS</option>
+                    <option value="Faild">FAILD</option>
+                </select>
+            </div>
+        </div>
         <br>
         <div class="inputicon" >
             <div class="form-group">
-                 <input type="text"  [(ngModel)]="identification" id="identification" name="identification"  class="form-control" placeholder="Cedula" >
+                 <input type="text"  [(ngModel)]="item" id="item" name="item"  class="form-control" placeholder="placeholder..." >
+                  <button (click)="createItem()" style="border: aliceblue;" type="button">+</button>
             </div>
        </div>
        <br>
-       <div class="inputicon" >
-           <div class="form-group">
-                <input type="text"  [(ngModel)]="name" id="name" name="name"  class="form-control" placeholder="Nombre" >
-           </div>
-      </div>
-     <br>
-     <div class="inputicon" >
-         <div class="form-group">
-              <input type="date"  [(ngModel)]="date" id="date" name="date"  class="form-control" placeholder="Fecha de ingreso" >
-         </div>
-    </div>
-    <br>
-    <div class="row flex-between">
-        <div class="d-inline-flex">
-        </div>
-        <div class="form-group">
-            <select [(ngModel)]="position" id="position" name="position" (change)="getListPosition()" class="d-inline-block form-control m-auto">
-                <option value="All">Cargo</option>
-                <option *ngFor="let list of lists" >{{list.name}}</option>
-            </select>
-        </div>
-    </div>
-       <br>
-       <button (click)="createItem()" style="border: rgb(32, 140, 235);background-color: blue;border-radius: 15px;color: white; width: 35%;margin-left: 20%;" type="button">Guardar</button>
-       <br>
-       <br>
-       <app-check  [name]="name" [listsEmployee]="listsEmployee" ></app-check>
+       <app-check *ngIf="name " [name]="name" [lists]="lists" ></app-check>
 </div>
 </div>
 
